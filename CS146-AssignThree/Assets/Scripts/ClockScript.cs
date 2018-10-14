@@ -21,12 +21,19 @@ public class ClockScript : MonoBehaviour
     {
         int seconds = (timeRemaining % 60);
         int minutes = (timeRemaining - seconds) / 60;
-        clock.text = minutes.ToString("0") + ":" + seconds.ToString("0");
+        if (seconds < 10)
+        {
+            clock.text = minutes.ToString("0") + ":0" + seconds.ToString("0");
+        }
+        else
+        {
+            clock.text = minutes.ToString("0") + ":" + seconds.ToString("0");
+        }
 
         if (timeRemaining <= 0)
         {
             StopCoroutine("LoseTime");
-            clock.text = "Time's Up";
+            clock.text = "Time's Up!";
         }
     }
 
