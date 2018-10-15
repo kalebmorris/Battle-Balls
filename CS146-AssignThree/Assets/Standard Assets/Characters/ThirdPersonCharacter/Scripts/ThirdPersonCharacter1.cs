@@ -24,6 +24,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         [SerializeField] float throwForce = 500f;
         [SerializeField] float releaseTime = 0.40f;
 
+        [SerializeField] GameObject ball;
+
         Rigidbody m_Rigidbody;
 		Animator m_Animator;
 		bool m_IsGrounded;
@@ -178,6 +180,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             sphere.tag = "Ball1";
             sphere.GetComponent<SphereCollider>().enabled = true;
             Rigidbody rb = sphere.AddComponent<Rigidbody>();
+            rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
             rb.AddForce((player.forward + new Vector3(0f, 0.35f, 0f)) * throwForce);
 
         }
@@ -211,8 +214,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 canThrow = false;
                 StartCoroutine(canThrowAgain());
                 m_Animator.SetTrigger("isThrowing");
-                GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                sphere.transform.localScale -= new Vector3(0.72f, 0.72f, 0.72f);
+                GameObject sphere = Instantiate(ball);
+                //sphere.transform.localScale -= new Vector3(0.72f, 0.72f, 0.72f);
 
                 sphere.GetComponent<SphereCollider>().enabled = false;
 

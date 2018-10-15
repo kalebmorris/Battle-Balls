@@ -23,6 +23,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         [SerializeField] AnimationClip throwing;
         [SerializeField] float throwForce = 500f;
         [SerializeField] float releaseTime = 0.40f;
+        [SerializeField] GameObject ball;
         //[SerializeField] float releaseTime1 = 0.50f;
 
         Rigidbody m_Rigidbody;
@@ -38,6 +39,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		CapsuleCollider m_Capsule;
 		bool m_Crouching;
         bool canThrow = true;
+
 
 
 
@@ -179,6 +181,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             sphere.tag = "Ball";
             sphere.GetComponent<SphereCollider>().enabled = true;
             Rigidbody rb = sphere.AddComponent<Rigidbody>();
+            rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
             rb.AddForce((player.forward + new Vector3(0f, 0.35f, 0f)) * throwForce);
 
 
@@ -214,10 +217,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 StartCoroutine(canThrowAgain());
                 Debug.Log("throwing");
                 m_Animator.SetTrigger("isThrowing");
-                GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                sphere.transform.localScale -= new Vector3(0.76f, 0.76f, 0.76f);
+                GameObject sphere = Instantiate(ball);
+                //sphere.transform.localScale += new Vector3(0f, 0.07f, 0.07f);
 
-                sphere.GetComponent<SphereCollider>().enabled = false;
+                //sphere.GetComponent<SphereCollider>().enabled = false;
 
                 sphere.transform.parent = handBone;
                 sphere.transform.localPosition = new Vector3(0.018f, -0.129f, 0f);
