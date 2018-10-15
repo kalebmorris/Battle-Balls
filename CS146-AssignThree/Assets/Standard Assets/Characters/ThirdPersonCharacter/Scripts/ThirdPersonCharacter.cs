@@ -23,6 +23,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         [SerializeField] AnimationClip throwing;
         [SerializeField] float throwForce = 500f;
         [SerializeField] float releaseTime = 0.40f;
+        [SerializeField] Material redMat;
         //[SerializeField] float releaseTime1 = 0.50f;
 
         Rigidbody m_Rigidbody;
@@ -215,6 +216,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 Debug.Log("throwing");
                 m_Animator.SetTrigger("isThrowing");
                 GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                sphere.GetComponent<Renderer>().material = redMat;
                 sphere.transform.localScale -= new Vector3(0.76f, 0.76f, 0.76f);
 
                 sphere.GetComponent<SphereCollider>().enabled = false;
