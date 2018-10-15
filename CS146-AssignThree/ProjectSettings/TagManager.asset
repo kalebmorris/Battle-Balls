@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Tile
+  - Fire
+  - Ball
+  - Ball1
+  - Player1
+  - Player2
   layers:
   - Default
   - TransparentFX

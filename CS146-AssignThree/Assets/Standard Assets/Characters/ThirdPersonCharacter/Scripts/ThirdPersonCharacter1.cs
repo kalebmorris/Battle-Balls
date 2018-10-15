@@ -175,7 +175,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         IEnumerator ThrowBall(GameObject sphere) {
             yield return new WaitForSeconds(releaseTime);
             sphere.transform.parent = null;
-
+            sphere.tag = "Ball1";
             sphere.GetComponent<SphereCollider>().enabled = true;
             Rigidbody rb = sphere.AddComponent<Rigidbody>();
             rb.AddForce((player.forward + new Vector3(0f, 0.35f, 0f)) * throwForce);
@@ -210,7 +210,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             
                 canThrow = false;
                 StartCoroutine(canThrowAgain());
-                Debug.Log("throwing");
                 m_Animator.SetTrigger("isThrowing");
                 GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                 sphere.transform.localScale -= new Vector3(0.72f, 0.72f, 0.72f);
