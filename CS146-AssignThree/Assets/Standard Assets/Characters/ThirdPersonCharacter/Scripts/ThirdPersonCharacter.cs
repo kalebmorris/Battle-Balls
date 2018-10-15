@@ -23,9 +23,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         [SerializeField] AnimationClip throwing;
         [SerializeField] float throwForce = 500f;
         [SerializeField] float releaseTime = 0.40f;
-        [SerializeField] GameObject ball;
-        //[SerializeField] float releaseTime1 = 0.50f;
-
+        [SerializeField] Material redMat;
         Rigidbody m_Rigidbody;
 		Animator m_Animator;
 		bool m_IsGrounded;
@@ -217,8 +215,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 StartCoroutine(canThrowAgain());
                 Debug.Log("throwing");
                 m_Animator.SetTrigger("isThrowing");
-                GameObject sphere = Instantiate(ball);
-                //sphere.transform.localScale += new Vector3(0f, 0.07f, 0.07f);
+                GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                sphere.GetComponent<Renderer>().material = redMat;
+                sphere.transform.localScale -= new Vector3(0.76f, 0.76f, 0.76f);
 
                 //sphere.GetComponent<SphereCollider>().enabled = false;
 
