@@ -213,13 +213,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             
                 canThrow = false;
                 StartCoroutine(canThrowAgain());
-                Debug.Log("throwing");
+                //Debug.Log("throwing");
                 m_Animator.SetTrigger("isThrowing");
                 GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                 sphere.GetComponent<Renderer>().material = redMat;
                 sphere.transform.localScale -= new Vector3(0.76f, 0.76f, 0.76f);
 
-                //sphere.GetComponent<SphereCollider>().enabled = false;
+                sphere.GetComponent<SphereCollider>().enabled = false;
 
                 sphere.transform.parent = handBone;
                 sphere.transform.localPosition = new Vector3(0.018f, -0.129f, 0f);

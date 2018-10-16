@@ -175,6 +175,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         IEnumerator ThrowBall(GameObject sphere) {
             yield return new WaitForSeconds(releaseTime);
+            //Debug.Log("throwing ball 1");
             sphere.transform.parent = null;
             sphere.tag = "Ball1";
             sphere.GetComponent<SphereCollider>().enabled = true;
@@ -214,6 +215,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 StartCoroutine(canThrowAgain());
                 m_Animator.SetTrigger("isThrowing");
                 GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+
                 sphere.GetComponent<Renderer>().material = blueMat;
                 sphere.transform.localScale -= new Vector3(0.72f, 0.72f, 0.72f);
 
