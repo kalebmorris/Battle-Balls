@@ -88,8 +88,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			UpdateAnimator(move);
 		}
 
+        private void OnEnable()
+        {
+            canThrow = true;
+        }
 
-		void ScaleCapsuleForCrouching(bool crouch)
+
+        void ScaleCapsuleForCrouching(bool crouch)
 		{
 			if (m_IsGrounded && crouch)
 			{
@@ -169,6 +174,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         IEnumerator canThrowAgain() {
             yield return new WaitForSeconds(throwing.length);
             //m_Animator.speed = 10;
+            Debug.Log("throwing reenabled");
             canThrow = true;
         }
 
@@ -176,12 +182,15 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         IEnumerator ThrowBall(GameObject sphere) {
             yield return new WaitForSeconds(releaseTime);
             //Debug.Log("throwing ball 1");
-            sphere.transform.parent = null;
-            sphere.tag = "Ball1";
-            sphere.GetComponent<SphereCollider>().enabled = true;
-            Rigidbody rb = sphere.AddComponent<Rigidbody>();
-            rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
-            rb.AddForce((player.forward + new Vector3(0f, 0.35f, 0f)) * throwForce);
+            if (sphere != null)
+            {
+                sphere.transform.parent = null;
+
+                sphere.GetComponent<SphereCollider>().enabled = true;
+                Rigidbody rb = sphere.AddComponent<Rigidbody>();
+                rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+                rb.AddForce((player.forward + new Vector3(0f, 0.35f, 0f)) * throwForce);
+            }
 
         }
 
@@ -218,6 +227,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
                 sphere.GetComponent<Renderer>().material = blueMat;
                 sphere.transform.localScale -= new Vector3(0.72f, 0.72f, 0.72f);
+                sphere.tag = "Ball1";
 
                 sphere.GetComponent<SphereCollider>().enabled = false;
 

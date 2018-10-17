@@ -35,13 +35,13 @@ public class GridCollision : MonoBehaviour {
                 Renderer re = GetComponent<Renderer>();
                 re.material = redMat;
                 Destroy(other.gameObject);
-                Instantiate(explosionRed, other.gameObject.transform.position + new Vector3(0, 0.2f, 0), Quaternion.identity);
+                Instantiate(explosionRed, other.gameObject.transform.position + new Vector3(0, 0.3f, 0), Quaternion.identity);
                 break;
             case "Ball1":
                 re = GetComponent<Renderer>();
                 re.material = blueMat;
                 Destroy(other.gameObject);
-                Instantiate(explosionBlue, other.gameObject.transform.position + new Vector3(0, 0.2f, 0), Quaternion.identity);
+                Instantiate(explosionBlue, other.gameObject.transform.position + new Vector3(0, 0.3f, 0), Quaternion.identity);
                 break;
             case "Player1":
                 if (GetComponent<Renderer>().material.color.Equals(blueMat.color) && !collided)
@@ -105,7 +105,7 @@ public class GridCollision : MonoBehaviour {
         //obj.SetActive(true);
 
         //Debug.Log("death effect destroyed");
-        Destroy(death_effect.gameObject);
+        //Destroy(death_effect.gameObject);
         env.GetComponent<EnvironmentManager>().ResetEnvironment();
         collided = false;
 

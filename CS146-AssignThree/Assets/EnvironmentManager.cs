@@ -32,6 +32,23 @@ public class EnvironmentManager : MonoBehaviour {
         Player2.SetPositionAndRotation(new Vector3(6.2f, 1f, 0f), Quaternion.Euler(0, 0, 0));
         Player1.gameObject.SetActive(true);
         Player2.gameObject.SetActive(true);
+        GameObject[] balls1 = GameObject.FindGameObjectsWithTag("Ball1");
+        for (int i = 0; i < balls1.Length; i++) {
+            print("destroyed ball1");
+            Destroy(balls1[i]);
+        }
+        GameObject[] balls = GameObject.FindGameObjectsWithTag("Ball");
+        for (int i = 0; i < balls.Length; i++)
+        {
+            Destroy(balls[i]);
+            print("destroyed ball");
+        }
+        GameObject[] effects = GameObject.FindGameObjectsWithTag("effect");
+        for (int i = 0; i < effects.Length; i++)
+        {
+            Destroy(effects[i]);
+            print("destroyed effect");
+        }
         HexGrid.GetComponent<GridManager>().ResetGrid();
     }
 }

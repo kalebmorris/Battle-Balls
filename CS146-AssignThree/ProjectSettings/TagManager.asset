@@ -10,6 +10,7 @@ TagManager:
   - Ball1
   - Player1
   - Player2
+  - effect
   layers:
   - Default
   - TransparentFX

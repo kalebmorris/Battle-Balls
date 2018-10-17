@@ -175,12 +175,15 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         IEnumerator ThrowBall(GameObject sphere) {
             yield return new WaitForSeconds(releaseTime);
-            sphere.transform.parent = null;
-            sphere.tag = "Ball";
-            sphere.GetComponent<SphereCollider>().enabled = true;
-            Rigidbody rb = sphere.AddComponent<Rigidbody>();
-            rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
-            rb.AddForce((player.forward + new Vector3(0f, 0.35f, 0f)) * throwForce);
+            if (sphere != null)
+            {
+                sphere.transform.parent = null;
+
+                sphere.GetComponent<SphereCollider>().enabled = true;
+                Rigidbody rb = sphere.AddComponent<Rigidbody>();
+                rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+                rb.AddForce((player.forward + new Vector3(0f, 0.35f, 0f)) * throwForce);
+            }
 
 
         }
@@ -217,6 +220,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 m_Animator.SetTrigger("isThrowing");
                 GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                 sphere.GetComponent<Renderer>().material = redMat;
+                sphere.tag = "Ball";
                 sphere.transform.localScale -= new Vector3(0.76f, 0.76f, 0.76f);
 
                 sphere.GetComponent<SphereCollider>().enabled = false;
@@ -229,7 +233,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             }
         }
 
-		void ApplyExtraTurnRotation()
+        private void OnEnable()
+        {
+            canThrow = true;
+        }
+
+        void ApplyExtraTurnRotation()
 		{
 			// help the character turn faster (this is in addition to root rotation in the animation)
 			float turnSpeed = Mathf.Lerp(m_StationaryTurnSpeed, m_MovingTurnSpeed, m_ForwardAmount);
