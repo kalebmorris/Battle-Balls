@@ -44,7 +44,8 @@ public class GridCollision : MonoBehaviour {
                 Instantiate(explosionBlue, other.gameObject.transform.position + new Vector3(0, 0.3f, 0), Quaternion.identity);
                 break;
             case "Player1":
-                if (GetComponent<Renderer>().material.color.Equals(blueMat.color) && !collided)
+                Debug.Log(blueMat.name);
+                if (GetComponent<Renderer>().material.name.Substring(0, 7).Equals(blueMat.name) && !collided)
                 {
                     //print("happeningbeforecoroutine");
                     //Debug.Log("playersteppedinblue");
@@ -55,7 +56,7 @@ public class GridCollision : MonoBehaviour {
                 }
                 break;
             case "Player2":
-                if (GetComponent<Renderer>().material.color.Equals(redMat.color) && !collided)
+                if (GetComponent<Renderer>().material.name.Substring(0, 6).Equals(redMat.name) && !collided)
                 {
                     //.Log("playersteppedinred");
                     collided = true;
